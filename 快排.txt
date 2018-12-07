@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<stdlib.h>
+void Quicksort(int*arr,int zuo,int you)
+{
+	int f,t;
+	int ytemp,ztemp;
+	ztemp=zuo;
+	ytemp=you;
+	f=arr[(zuo+you)/2];
+	while(ztemp<ytemp)
+	{
+		while(arr[ztemp]<f)		//  查找左边比规定值小的，直到左边出现比规定值大的
+		{
+			++ztemp;
+		}
+		while(arr[ytemp]>f)		//查找右边比规定值大的，直到右边出现比规定值小的
+		{
+			--ytemp;
+		}
+		if(ztemp<=ytemp)		//如果左边的坐标大于或等于右边，那么把两个值交换，且右边坐标向左移动一位，左边左边向左移动一位
+		{
+			t=arr[ztemp];
+			arr[ztemp]=arr[ytemp];
+			arr[ytemp]=t;
+			--ytemp;
+			++ztemp;
+		}
+	}
+	if(ztemp==ytemp)			//判断是否相等，是相等左边左边加1
+	{
+		ztemp++;
+	}
+	if(zuo<ytemp)
+	{
+		Quicksort(arr,zuo,ztemp-1);     // 递归调用
+	}
+	if(ztemp<you)
+	{
+		Quicksort(arr,ytemp+1,you);    //递归调用
+	}
+}
